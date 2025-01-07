@@ -1,0 +1,26 @@
+/**
+ * @param {Function} fn
+ * @return {Function}
+ */
+var once = function(fn) {
+    let called = false; // Tracks if the function has been called
+    let result; // Stores the result of the first call
+
+    return function(...args) {
+        if (!called) {
+            called = true; // Mark as called
+            result = fn(...args); // Call the original function
+            return result;
+        }
+        return undefined; // Return undefined for subsequent calls
+    };
+};
+
+// Example usage
+/**
+ * let fn = (a, b, c) => (a + b + c);
+ * let onceFn = once(fn);
+ *
+ * console.log(onceFn(1, 2, 3)); // Output: 6
+ * console.log(onceFn(2, 3, 6)); // Output: undefined
+ */
